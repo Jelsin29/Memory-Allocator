@@ -1,0 +1,58 @@
+Memory Allocation and Deallocation Implementation Report
+
+1. Introduction
+The code snippet provided implements a custom memory allocation and deallocation system. It includes functions for allocating memory (mymalloc) and freeing memory (myfree). Additionally, it offers various strategies for managing memory allocation.
+
+2. Code Structure
+
+Memory Allocation Functions:
+
+mymalloc(size_t size): Allocates memory of the specified size.
+myfree(void *p): Frees memory previously allocated by mymalloc.
+Memory Management Strategies:
+The code supports the following strategies:
+First Fit: Allocates the first available block that fits the requested size.
+Best Fit: Searches for the smallest available block that accommodates the requested size.
+Worst Fit: Identifies the largest available block that can hold the requested size.
+Next Fit: Allocates the next available block after the last deallocated block.
+
+Helper Functions:
+Functions for coalescing adjacent free blocks (left_coalesce, right_coalesce).
+Functions for splitting blocks (split_block).
+Functions for navigating the free list (next_block_in_addr, prev_block_in_addr, next_block_in_freelist, prev_block_in_freelist).
+
+Utility Functions:
+numberof16blocks: Calculates the number of 16-byte blocks needed to store a given size.
+printheap: Prints information about each block in the heap.
+
+Main Function:
+The main function demonstrates the usage of memory allocation and deallocation functions. It also showcases how to set and retrieve memory management parameters, such as list type and strategy.
+
+3. Memory Management
+The mymalloc function:
+Rounds up the requested size to the nearest multiple of 16.
+Initializes the heap (if it’s the first call) using malloc and sets up the free list.
+Selects a suitable free block based on the chosen strategy.
+Splits the block if necessary.
+Marks the block as used.
+Extends the heap using malloc if no suitable free block is found.
+The myfree function:
+Avoids freeing a NULL pointer.
+Coalesces adjacent free blocks if possible.
+Adds the block back to the free list.
+
+4. Analysis
+
+Advantages:
+Custom memory management strategies allow optimization based on specific application requirements.
+Coalescing of free blocks minimizes fragmentation and improves memory utilization.
+Utility functions enhance flexibility in managing the heap and free list.
+
+Challenges:
+Manual memory management can introduce errors.
+Lack of error handling for memory allocation failures.
+Limited validation of function parameters.
+Complexity in maintaining and updating the free list during coalescing or block splitting.
+
+5. Conclusion
+The provided code offers a customizable approach to memory allocation and deallocation. Developers can tailor memory management strategies to their needs. However, ensuring robust error handling and thorough testing is crucial for a reliable and stable memory management system. With proper optimization, this code can effectively manage memory in diverse software applications.
